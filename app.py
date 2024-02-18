@@ -14,3 +14,8 @@ try:
 except FileNotFoundError:
     with open(USUARIOS, 'w') as file:
         json.dump([], file)
+
+# Função que retorna todos os usuários armazenados
+def get_todos_usuarios():
+    with open(USUARIOS, 'r') as file:
+        return json.load(file)

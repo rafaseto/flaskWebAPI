@@ -61,10 +61,10 @@ def req_post_usuario():
     return jsonify({'message': 'Usuário armazenado com sucesso!'}), 201
 
 # Rota referente à requisição GET
-@app.route('/usuario', methods=['GET'])
+@app.route('/usuario/<int:cpf>', methods=['GET'])
 def req_get_usuario(cpf):
     usuario = get_usuario(cpf)
-    if usuario == None:
+    if usuario is None:
         return jsonify({'error': 'Usuário not found.'}), 404
     return jsonify(usuario), 200
 

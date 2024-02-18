@@ -38,7 +38,7 @@ def add_usuario(usuario):
 
 # Rota referente à requisição POST
 @app.route('/usuario', methods=['POST'])
-def post_usuario():
+def req_post_usuario():
     # Dados da requisição no formato json
     dados_requisicao = request.json
 
@@ -59,3 +59,11 @@ def post_usuario():
     # Adiciona o usuário ao arquivo de armazenamento 
     add_usuario(dados_requisicao)
     return jsonify({'message': 'Usuário armazenado com sucesso!'}), 201
+
+# Rota referente à requisição GET
+@app.route('/usuario', methods=['GET'])
+def req_get_usuario(cpf):
+    usuario = get_usuario(cpf)
+    if usuario == None:
+        return jsonify({'error': 'Usuário not found.'}), 404
+    return jsonify(usuario), 200

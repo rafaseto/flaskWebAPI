@@ -67,3 +67,5 @@ def req_get_usuario(cpf):
     if usuario == None:
         return jsonify({'error': 'Usuário not found.'}), 404
     return jsonify(usuario), 200
+
+app.run()

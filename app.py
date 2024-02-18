@@ -35,4 +35,27 @@ def add_usuario(usuario):
     with open(USUARIOS, 'w') as file:
         json.dump(todos_usuarios, file)
 
-add_usuario({"cpf": 12632382409, "nome": "Maia Takeguma", "data_nascimento": "2020-05-05"})
+
+# Rota referente à requisição POST
+@app.route('/usuario', methods=['POST'])
+def post_usuario():
+    # Dados da requisição no formato json
+    dados_requisicao = request.json
+
+    # Checamos se algum campo está faltante
+    if 'cpf' not in dados_requisicao:
+        return jsonify({'error': 'CPF é um campo obrigatório.'}), 400
+    elif 'nome' not in dados_requisicao:
+        return jsonify({'error': 'Nome é um campo obrigatório.'}), 400
+    elif 'data_nascimento' not in dados_requisicao:
+        return jsonify({'error': 'Data de nascimento é um campo obrigatório.'}), 400
+    
+    # Checamos se o usuário já existe, ou seja, se o CPF já está armazenado
+    todos_usuarios = get_todos_usuarios()
+    for usuario in todos_usuarios:
+        if usuario['cpf'] == dados_requisicao['cpf']:
+            return jsonify({'error': 'Usuário já existe!'}), 409
+
+    # Adiciona o usuário ao arquivo de armazenamento 
+    add_usuario(dados_requisicao)
+    return jsonify({'message': 'Usuário armazenado com sucesso!'}), 201

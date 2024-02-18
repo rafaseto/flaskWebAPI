@@ -1,12 +1,17 @@
 [
     {
-        "cpf": 12345678900,
-        "nome": "Rafael Seto",
+        "cpf": 12345678900, 
+        "nome": "Rafael Seto", 
         "data_nascimento": "2003-05-15"
-    },
+    }, 
     {
-        "cpf": 98765432100,
-        "nome": "Laura Farias",
+        "cpf": 98765432100, 
+        "nome": "Laura Farias", 
         "data_nascimento": "1978-10-20"
+    }, 
+    {
+        "cpf": 12632382409, 
+        "nome": "Maia Takeguma", 
+        "data_nascimento": "2020-05-05"
     }
-] 
+]

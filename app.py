@@ -22,8 +22,17 @@ def get_todos_usuarios():
     
 # Função que retorna um usuário referente a um CPF
 def get_usuario(cpf):
-    usuarios = get_todos_usuarios()
-    for usuario in usuarios:
+    todos_usuarios = get_todos_usuarios()
+    for usuario in todos_usuarios:
         if usuario['cpf'] == cpf:
             return usuario      # retorna os dados do usuário, caso ele exista
     return None     # 'None', caso o usuário respectivo ao CPF passado como argumento não exista
+
+# Função que adiciona um novo usuário no arquivo 'usuarios.json'
+def add_usuario(usuario):
+    todos_usuarios = get_todos_usuarios()
+    todos_usuarios.append(usuario)
+    with open(USUARIOS, 'w') as file:
+        json.dump(todos_usuarios, file)
+
+add_usuario({"cpf": 12632382409, "nome": "Maia Takeguma", "data_nascimento": "2020-05-05"})

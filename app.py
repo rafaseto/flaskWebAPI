@@ -19,3 +19,11 @@ except FileNotFoundError:
 def get_todos_usuarios():
     with open(USUARIOS, 'r') as file:
         return json.load(file)
+    
+# Função que retorna um usuário referente a um CPF
+def get_usuario(cpf):
+    usuarios = get_todos_usuarios()
+    for usuario in usuarios:
+        if usuario['cpf'] == cpf:
+            return usuario      # retorna os dados do usuário, caso ele exista
+    return None     # 'None', caso o usuário respectivo ao CPF passado como argumento não exista
